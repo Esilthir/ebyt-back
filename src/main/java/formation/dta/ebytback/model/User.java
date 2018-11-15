@@ -1,13 +1,17 @@
 package formation.dta.ebytback.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.*;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 @Entity
 @Table(name="users")
-public class User implements Serializable {
+public class User implements Serializable, UserDetails {
 
 	/**
 	 * 
@@ -21,11 +25,11 @@ public class User implements Serializable {
 	@Column
 	private String password;
 	@Column
-	private String nom;
+	private String lastname;
 	@Column
-	private String prenom;
+	private String firstname;
 	@Column
-	private String photo;
+	private String picture;
 	@Column
 	private String role;
 	
@@ -34,14 +38,24 @@ public class User implements Serializable {
 		this("test@hotmail.fr", "1234", "nom", "prenom");
 	}
 	
+	public User(User user) {
+		this.username = user.getUsername();
+		this.password = user.getPassword();
+		this.lastname = user.getLastname();
+		this.firstname = user.getFirstname();
+		this.picture = "";
+		this.role = EnumRole.ROLE_USER.getRole();
+	}
+	
 	public User(String mail, String mdp, String nom, String prenom) {
 		this.username = mail;
 		this.password = mdp;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.photo = "";
+		this.lastname = nom;
+		this.firstname = prenom;
+		this.picture = "";
 		this.role = EnumRole.ROLE_USER.getRole();
 	}
+
 
 	public Long getId() {
 		return id;
@@ -67,28 +81,28 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public String getNom() {
-		return nom;
+	public String getLastname() {
+		return lastname;
 	}
 
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
-	public String getPrenom() {
-		return prenom;
+	public String getFirstname() {
+		return firstname;
 	}
 
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
-	public String getPhoto() {
-		return photo;
+	public String getPicture() {
+		return picture;
 	}
 
-	public void setPhoto(String photo) {
-		this.photo = photo;
+	public void setPicture(String picture) {
+		this.picture = picture;
 	}
 
 	public String getRole() {
@@ -97,5 +111,35 @@ public class User implements Serializable {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return false;
 	}	
 }

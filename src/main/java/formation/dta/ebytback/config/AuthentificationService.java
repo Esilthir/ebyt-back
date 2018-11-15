@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import formation.dta.ebytback.model.EnumRole;
 import formation.dta.ebytback.model.User;
+import formation.dta.ebytback.repository.UserRepository;
 import formation.dta.ebytback.service.UserService;
 
 
@@ -23,17 +24,28 @@ import formation.dta.ebytback.service.UserService;
 public class AuthentificationService implements UserDetailsService{
 
     @Autowired
-    private UserService userservice;
+    private UserService userService;
+    @Autowired
+    private UserRepository userRepository;
 
+//    @Override
+//    public UserDetails loadUserByUsername(final String username) {
+//        Optional<User> option = userservice.findOneByUsername(username);
+//        if (option.isPresent()) {
+//            User user = option.get();
+//            List<GrantedAuthority> rules = this.getUserCredentials(user);
+//            return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), rules);
+//        }
+//        throw new UsernameNotFoundException("username.not.found");
+//    }
+    
     @Override
-    public UserDetails loadUserByUsername(final String username) {
-        Optional<User> option = userservice.findOneByUsername(username);
-        if (option.isPresent()) {
-            User user = option.get();
-            List<GrantedAuthority> rules = this.getUserCredentials(user);
-            return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), rules);
+    public UserDetails loadUserByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException(username);
         }
-        throw new UsernameNotFoundException("username.not.found");
+        return new User(user);
     }
 
     
