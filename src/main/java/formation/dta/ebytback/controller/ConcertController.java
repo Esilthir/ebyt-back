@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,20 +37,20 @@ public class ConcertController {
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@CrossOrigin(origins = "*")
-	@GetMapping("/{id}")
+	@DeleteMapping("/{id}")
 	public void deleteById(long id) {
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@CrossOrigin(origins = "*")
-	@GetMapping("/}")
+	@PostMapping("/}")
 	public Concert create(Concert concert) {
 		return concertRepository.save(concert);
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@CrossOrigin(origins = "*")
-	@GetMapping("/}")
+	@PutMapping("/}")
 	public Concert update(Concert concert) {
 		return concertRepository.save(concert);
 	}

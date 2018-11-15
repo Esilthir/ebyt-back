@@ -27,24 +27,24 @@ public class Concert {
 	@Column
 	private String description;
 	@Column
-	private int places_max_nb;
+	private int nbMaxPlaces;
 	@Column
 	private int price;
 	@Column
-	private int places_nb_price;
+	private int nbBoughtPlace;
 
 	public Concert() {}
 
-	public Concert(String artist, Date date, String place, String genre, String description, int places_max_nb,
-			int price, int places_nb_price) {
+	public Concert(String artist, Date date, String place, String genre, String description, int nbMaxPlaces,
+			int price, int nbBoughtPlace) {
 		this.artist = artist;
 		this.date = date;
 		this.place = place;
 		this.genre = genre;
 		this.description = "";
-		this.places_max_nb = 0;
+		this.nbMaxPlaces = 0;
 		this.price = 0;
-		this.places_nb_price = 0;
+		this.nbBoughtPlace = 0;
 	}
 
 	public Long getId() {
@@ -95,13 +95,6 @@ public class Concert {
 		this.description = description;
 	}
 
-	public int getPlaces_max_nb() {
-		return places_max_nb;
-	}
-
-	public void setPlaces_max_nb(int places_max_nb) {
-		this.places_max_nb = places_max_nb;
-	}
 
 	public int getPrice() {
 		return price;
@@ -111,13 +104,23 @@ public class Concert {
 		this.price = price;
 	}
 
-	public int getPlaces_nb_price() {
-		return places_nb_price;
+	public int getNbMaxPlaces() {
+		return nbMaxPlaces;
 	}
 
-	public void setPlaces_nb_price(int places_nb_price) {
-		this.places_nb_price = places_nb_price;
+	public void setNbMaxPlaces(int nbMaxPlaces) {
+		this.nbMaxPlaces = nbMaxPlaces;
+	}
+
+	public int getNbBoughtPlace() {
+		return nbBoughtPlace;
+	}
+
+	public void setNbBoughtPlace(int nbBoughtPlace) {
+		this.nbBoughtPlace = nbBoughtPlace;
 	}
 	
 	
+
+
 }
