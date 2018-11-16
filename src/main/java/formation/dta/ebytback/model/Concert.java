@@ -27,16 +27,16 @@ public class Concert {
 	@Column
 	private String description;
 	@Column
-	private int nbMaxPlaces;
+	private Integer nbMaxPlaces;
 	@Column
-	private int price;
+	private Integer price;
 	@Column
-	private int nbBoughtPlace;
+	private Integer nbBoughtPlace;
 
 	public Concert() {}
 
-	public Concert(String artist, Date date, String place, String genre, String description, int nbMaxPlaces,
-			int price, int nbBoughtPlace) {
+	public Concert(String artist, Date date, String place, String genre, String description, Integer nbMaxPlaces,
+			Integer price, Integer nbBoughtPlace) {
 		this.artist = artist;
 		this.date = date;
 		this.place = place;
@@ -96,31 +96,27 @@ public class Concert {
 	}
 
 
-	public int getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 
-	public int getNbMaxPlaces() {
+	public Integer getNbMaxPlaces() {
 		return nbMaxPlaces;
 	}
 
-	public void setNbMaxPlaces(int nbMaxPlaces) {
+	public void setNbMaxPlaces(Integer nbMaxPlaces) {
 		this.nbMaxPlaces = nbMaxPlaces;
 	}
 
-	public int getNbBoughtPlace() {
+	public Integer getNbBoughtPlace() {
 		return nbBoughtPlace;
 	}
 
-	public void setNbBoughtPlace(int nbBoughtPlace) {
+	public void setNbBoughtPlace(Integer nbBoughtPlace) {
 		this.nbBoughtPlace = nbBoughtPlace;
 	}
-	
-	
-
-
 }
