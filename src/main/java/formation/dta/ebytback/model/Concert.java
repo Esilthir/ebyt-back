@@ -19,6 +19,8 @@ public class Concert {
 	@Column
 	private String artist;
 	@Column
+	private String name;
+	@Column
 	private Date date;
 	@Column
 	private String place;
