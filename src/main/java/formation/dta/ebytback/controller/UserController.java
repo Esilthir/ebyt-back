@@ -5,7 +5,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,20 +35,20 @@ public class UserController {
 	@PostMapping("/")
 	public User createUser(@RequestBody @Valid User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-		return userRepository.save(user);
+		return userService.create(user);
 	}
 	
 	@CrossOrigin(origins = "*")
 	@DeleteMapping("/{id}")
-	public void delete(@PathVariable("id") Long id) {
-		userRepository.deleteById(id);
+	public void deleteUserById(@PathVariable("id") Long id) {
+		userService.deleteUserById(id);
 	}
 	
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+
 	@CrossOrigin(origins = "*")
 	@GetMapping("/")
 	public List<User> getAll() {
-		return userRepository.findAll();
+		return userService.findAll();
 	}
 	
 }

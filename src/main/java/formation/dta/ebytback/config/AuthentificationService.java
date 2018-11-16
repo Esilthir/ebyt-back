@@ -25,28 +25,18 @@ public class AuthentificationService implements UserDetailsService{
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private UserRepository userRepository;
-
-//    @Override
-//    public UserDetails loadUserByUsername(final String username) {
-//        Optional<User> option = userservice.findOneByUsername(username);
-//        if (option.isPresent()) {
-//            User user = option.get();
-//            List<GrantedAuthority> rules = this.getUserCredentials(user);
-//            return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), rules);
-//        }
-//        throw new UsernameNotFoundException("username.not.found");
-//    }
-    
     @Override
-    public UserDetails loadUserByUsername(String username) {
-        User user = userRepository.findByUsername(username);
-        if (user == null) {
-            throw new UsernameNotFoundException(username);
+    public UserDetails loadUserByUsername(final String username) {
+        Optional<User> option = userService.findByUsername(username);
+        if (option.isPresent()) {
+        	User user = option.get();
+            List<GrantedAuthority> rules = this.getUserCredentials(user);
+            return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), rules);
         }
-        return new User(user);
+        throw new UsernameNotFoundException("username.not.found");
     }
+    
+
 
     
     // methode retournant une liste des droits de luser. Exemple un admin a les droits Role_ADMIN et ROLE_USER
