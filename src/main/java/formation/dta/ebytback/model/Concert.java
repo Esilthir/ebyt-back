@@ -41,10 +41,10 @@ public class Concert {
 		this.date = date;
 		this.place = place;
 		this.genre = genre;
-		this.description = "";
-		this.nbMaxPlaces = 0;
-		this.price = 0;
-		this.nbBoughtPlace = 0;
+		this.description = description;
+		this.nbMaxPlaces = nbMaxPlaces;
+		this.price = price;
+		this.nbBoughtPlace = nbBoughtPlace;
 	}
 
 	public Long getId() {
