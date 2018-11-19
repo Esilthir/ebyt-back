@@ -34,6 +34,8 @@ public class Concert {
 	private Integer price;
 	@Column
 	private Integer nbBoughtPlace;
+	@Column
+	private boolean active;
 
 	public Concert() {}
 
@@ -48,6 +50,7 @@ public class Concert {
 		this.nbMaxPlaces = nbMaxPlaces;
 		this.price = price;
 		this.nbBoughtPlace = 0;
+		this.active = true;
 	}
 
 	public Long getId() {
@@ -130,6 +133,15 @@ public class Concert {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+	
 	
 	
 }
