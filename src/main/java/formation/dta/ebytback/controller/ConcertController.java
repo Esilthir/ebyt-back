@@ -121,4 +121,9 @@ public class ConcertController {
 		return concertRepository.findById(id);
 	}
 	
+	@CrossOrigin(origins = "*")
+	@GetMapping("/all")
+	public List<Concert> getAll() {
+		return concertService.findAll();
+	}
 }

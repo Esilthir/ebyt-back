@@ -37,8 +37,9 @@ public class Concert {
 
 	public Concert() {}
 
-	public Concert(String artist, Date date, String place, String genre, String description, Integer nbMaxPlaces,
-			Integer price, Integer nbBoughtPlace) {
+	public Concert(String name, String artist, Date date, String place, String genre, String description, Integer nbMaxPlaces,
+			Integer price) {
+		this.name = name;
 		this.artist = artist;
 		this.date = date;
 		this.place = place;
@@ -46,7 +47,7 @@ public class Concert {
 		this.description = description;
 		this.nbMaxPlaces = nbMaxPlaces;
 		this.price = price;
-		this.nbBoughtPlace = nbBoughtPlace;
+		this.nbBoughtPlace = 0;
 	}
 
 	public Long getId() {
@@ -121,4 +122,14 @@ public class Concert {
 	public void setNbBoughtPlace(Integer nbBoughtPlace) {
 		this.nbBoughtPlace = nbBoughtPlace;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
 }
