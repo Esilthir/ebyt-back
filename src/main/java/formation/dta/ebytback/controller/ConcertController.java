@@ -1,12 +1,8 @@
 package formation.dta.ebytback.controller;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Collections;
-=======
 import java.time.LocalDate;
->>>>>>> 334a7f709cf6cd6240842499ab3ad1d60dfb2415
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,7 +48,7 @@ public class ConcertController {
 	@GetMapping("/")
 	public Page<Concert> getAll(@RequestParam Integer pageNumber, @RequestParam Integer pageSize,
 			@RequestParam(required = false) String artist, @RequestParam(required = false) String name,
-			@RequestParam(required = false) Date date, @RequestParam(required = false) String genre,
+			@RequestParam(required = false) LocalDate date, @RequestParam(required = false) String genre,
 			@RequestParam(required = false) String place) {
 
 		Pageable pageRequest = PageRequest.of(pageNumber, pageSize);
