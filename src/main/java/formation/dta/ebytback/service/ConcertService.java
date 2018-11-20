@@ -9,11 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import formation.dta.ebytback.model.Concert;
-import formation.dta.ebytback.model.User;
 import formation.dta.ebytback.repository.ConcertRepository;
 
 @Service
@@ -32,6 +29,18 @@ public class ConcertService {
 	
 	public Page<Concert> findAllOrderByDateDesc(Pageable pageRequest) {
 		return concertRepository.findAllByOrderByDateDesc(pageRequest);
+	}
+	
+	public List<Concert> findAllByOrderByIdAsc() {
+		return concertRepository.findAllByOrderByIdAsc();
+	}
+	
+	public List<Concert> findAllByOrderByIdDesc() {
+		return concertRepository.findAllByOrderByIdDesc();
+	}
+	
+	public List<Concert> findTop12ByOrderByIdDesc() {
+		return concertRepository.findTop12ByOrderByIdDesc();
 	}
 	public List<Concert> findAllByName( String name) {
 		return concertRepository.findAllByName(name);

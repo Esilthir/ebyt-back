@@ -16,11 +16,16 @@ public interface ConcertRepository extends JpaRepository<Concert, Long> {
 	
 	Page<Concert> findAllByOrderByDateDesc(Pageable pageRequest);
 	
+	List<Concert> findAllByOrderByIdAsc();
+	List<Concert> findAllByOrderByIdDesc();
+	List<Concert> findTop12ByOrderByIdDesc();
+	
 	List<Concert> findAllByName(String name);
 	List<Concert> findAllByArtist(String artist);
 	List<Concert> findAllByGenre(String genre);
 	List<Concert> findAllByDate(String date);
 	List<Concert> findAllByPlace(String place);
+
 	
 	
 	

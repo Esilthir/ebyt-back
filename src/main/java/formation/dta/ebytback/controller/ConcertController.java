@@ -1,5 +1,7 @@
 package formation.dta.ebytback.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -141,5 +143,33 @@ public class ConcertController {
 	@GetMapping("/all")
 	public List<Concert> getAll() {
 		return concertService.findAll();
+	}
+	
+	@CrossOrigin(origins = "*")
+	@GetMapping("/fame")
+	public List<Concert> getFameConcerts() {
+		List<Concert> allConcert =  concertService.findAllByOrderByIdAsc();
+		List<Concert> concertFame = new ArrayList<Concert>();
+		for (Concert concert : allConcert) {
+			concertFame.add(concert);
+			if ( concert.getId() == 4 ) {
+				break;
+			}
+		}
+		return concertFame;
+	}
+	
+	@CrossOrigin(origins = "*")
+	@GetMapping("/last")
+	public List<Concert> getLastConcerts() {
+		return concertService.findTop12ByOrderByIdDesc();
+//		List<Concert> concertLast = new ArrayList<Concert>();
+//		for (Concert concert : allConcert) {
+//			concertLast.add(concert);
+//			if (concertLast.size() == 12) {
+//				break;
+//			}
+//		}
+//		return concertLast;
 	}
 }
