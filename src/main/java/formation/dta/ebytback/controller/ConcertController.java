@@ -120,7 +120,7 @@ public class ConcertController {
 	// @PreAuthorize("hasRole('ROLE_ADMIN')")
 	@CrossOrigin(origins = "*")
 	@DeleteMapping("/{id}")
-	public void deleteConcert(@PathVariable("id") Long id) throws DeleteException, ResourceNotFoundException {
+	public void deleteConcert(@PathVariable("id") Long id) {
 		// si des réservations ont déjà été faites sur le concert, renvoie un message
 		Optional<Concert> oConcert = concertService.getById(id);
 		if(oConcert.isPresent()) {
