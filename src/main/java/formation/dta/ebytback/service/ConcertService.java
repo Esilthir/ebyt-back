@@ -56,6 +56,25 @@ public class ConcertService {
 	public Optional<Concert> getById(@PathParam("id") Long id) {
 		return concertRepository.findById(id);
 	}
+	
+	public Concert updateConcert(Optional<Concert> oConcert, Concert concert) {
+		oConcert.get().setName(concert.getName());
+		oConcert.get().setArtist(concert.getArtist());
+		oConcert.get().setDate(concert.getDate());
+		oConcert.get().setPlace(concert.getPlace());
+		oConcert.get().setGenre(concert.getGenre());
+		oConcert.get().setDescription(concert.getDescription());
+		oConcert.get().setNbMaxPlaces(concert.getNbMaxPlaces());
+		oConcert.get().setPrice(concert.getPrice());
+		oConcert.get().setNbBoughtPlace(concert.getNbBoughtPlace());
+		oConcert.get().setUrlPic(concert.getUrlPic());
+		oConcert.get().setActive(concert.isActive());
+		oConcert.get().setUrlVideo(concert.getUrlVideo());
+		oConcert.get().setUrlPicRec(concert.getUrlPicRec());
+		
+		Concert updateConcert = concertRepository.save(oConcert.get());
+		return updateConcert;
+	}
 
 	
 }

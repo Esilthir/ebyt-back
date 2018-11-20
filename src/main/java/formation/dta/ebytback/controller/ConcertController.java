@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -89,12 +90,19 @@ public class ConcertController {
 		return concertRepository.save(concert);
 	}
 
-//	@PreAuthorize("hasRole('ROLE_ADMIN')")
-//	@CrossOrigin(origins = "*")
-//	@PutMapping("/")
-//	public Concert update(Concert concert) {
-//		return concertRepository.save(concert);
-//	}
+	
+	@CrossOrigin(origins = "*")
+	@PutMapping("/{id}")
+	public Concert update(@PathVariable("id")Long id, @RequestBody Concert concert) {
+		Optional<Concert> oConcert = concertService.getById(id);
+		if (oConcert.isPresent()) {
+			return concertService.updateConcert(oConcert, concert);
+		}
+		ResourceNotFoundException exceptionNotFound = new ResourceNotFoundException("Le concert " + id + " n'ap as été trouvé");
+		throw exceptionNotFound;
+		
+
+	}
 
 	// @PreAuthorize("hasRole('ROLE_ADMIN')")
 	@CrossOrigin(origins = "*")
@@ -114,19 +122,17 @@ public class ConcertController {
 	@DeleteMapping("/{id}")
 	public void deleteConcert(@PathVariable("id") Long id) throws DeleteException, ResourceNotFoundException {
 		// si des réservations ont déjà été faites sur le concert, renvoie un message
-		System.out.println(id);
 		Optional<Concert> oConcert = concertService.getById(id);
 		if(oConcert.isPresent()) {
-			System.out.println(oConcert.get());
 			concert = oConcert.get();
-			if (concert.getNbBoughtPlace() == 0) {
+			if (concert.getNbBoughtPlace() == null || concert.getNbBoughtPlace() == 0) {
 				concertRepository.deleteById(id);
 				return;
 			}
 			DeleteException exceptionDelete = new DeleteException();
 			throw exceptionDelete;
 		}
-		ResourceNotFoundException exceptionNotFound = new ResourceNotFoundException("Le concert " + id + " n'ap as été trouvé");
+		ResourceNotFoundException exceptionNotFound = new ResourceNotFoundException("Le concert " + id + " n'a pas été trouvé");
 		throw exceptionNotFound;
 
 	}
