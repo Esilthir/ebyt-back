@@ -31,7 +31,7 @@ public class Concert {
 	@Column
 	private Integer nbMaxPlaces;
 	@Column
-	private Integer price;
+	private Double price;
 	@Column
 	private Integer nbBoughtPlace;
 	@Column
@@ -46,7 +46,7 @@ public class Concert {
 	public Concert() {}
 
 	public Concert(String name, String artist, Date date, String place, String genre, String description, Integer nbMaxPlaces,
-			Integer price) {
+			Double price) {
 		this.name = name;
 		this.artist = artist;
 		this.date = date;
@@ -60,7 +60,7 @@ public class Concert {
 	}
 	
 	public Concert(String name, String artist, Date date, String place, String genre, String description, Integer nbMaxPlaces,
-			Integer price, String urlVideo, String urlPic, String urlPicRec) {
+			Double price, String urlVideo, String urlPic, String urlPicRec) {
 		this(name, artist, date, place, genre, description, nbMaxPlaces, price);
 		this.urlPic = urlPic;
 		this.urlPicRec = urlPicRec;
@@ -116,11 +116,11 @@ public class Concert {
 	}
 
 
-	public Integer getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(Integer price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
