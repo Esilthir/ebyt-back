@@ -1,18 +1,19 @@
 package formation.dta.ebytback.controller;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Collections;
+=======
+import java.time.LocalDate;
+>>>>>>> 334a7f709cf6cd6240842499ab3ad1d60dfb2415
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,6 +30,7 @@ import formation.dta.ebytback.exception.DeleteException;
 import formation.dta.ebytback.exception.ResourceNotFoundException;
 import formation.dta.ebytback.model.Concert;
 import formation.dta.ebytback.repository.ConcertRepository;
+import formation.dta.ebytback.repository.ConcertRepositoryImpl;
 import formation.dta.ebytback.service.ConcertService;
 
 @RestController
@@ -39,6 +41,8 @@ public class ConcertController {
 	ConcertService concertService;
 	@Autowired
 	ConcertRepository concertRepository;
+	@Autowired
+	ConcertRepositoryImpl concertRepositoryCustom;
 	@Autowired
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -122,7 +126,7 @@ public class ConcertController {
 	// @PreAuthorize("hasRole('ROLE_ADMIN')")
 	@CrossOrigin(origins = "*")
 	@DeleteMapping("/{id}")
-	public void deleteConcert(@PathVariable("id") Long id) throws DeleteException, ResourceNotFoundException {
+	public void deleteConcert(@PathVariable("id") Long id) {
 		// si des réservations ont déjà été faites sur le concert, renvoie un message
 		Optional<Concert> oConcert = concertService.getById(id);
 		if(oConcert.isPresent()) {
@@ -172,4 +176,18 @@ public class ConcertController {
 //		}
 //		return concertLast;
 	}
+
+	@GetMapping("/getAll")
+	public List<Concert> getConcerts(
+			@RequestParam(required = false) String genre,
+			@RequestParam(required = false) String name,
+			@RequestParam(required = false) String artist,
+			@RequestParam(required = false) LocalDate date,
+			@RequestParam(required = false) String place,
+			@RequestParam(required = false) Double pricemax,
+			@RequestParam(required = false) boolean active
+			) {
+		return concertRepositoryCustom.search(genre, name, artist, date, place, pricemax, active);
+	}
+	
 }

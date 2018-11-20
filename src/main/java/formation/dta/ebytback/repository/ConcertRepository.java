@@ -27,6 +27,6 @@ public interface ConcertRepository extends JpaRepository<Concert, Long> {
 	List<Concert> findAllByPlace(String place);
 
 	
+		
+	}
 	
-	
-}
