@@ -22,6 +22,6 @@ public interface ConcertRepository extends JpaRepository<Concert, Long> {
 	List<Concert> findAllByDate(String date);
 	List<Concert> findAllByPlace(String place);
 	
+		
+	}
 	
-	
-}
