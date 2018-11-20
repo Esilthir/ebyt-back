@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import formation.dta.ebytback.model.Concert;
+import formation.dta.ebytback.model.User;
 import formation.dta.ebytback.repository.ConcertRepository;
 
 @Service
@@ -18,6 +19,10 @@ public class ConcertService {
 	
 	public Page<Concert> findAll(Pageable pageRequest) {
 		return concertRepository.findAll(pageRequest);
+	}
+	
+	public List<Concert> findAll() {
+		return concertRepository.findAll();
 	}
 	
 	public Page<Concert> findAllOrderByDateDesc(Pageable pageRequest) {
@@ -38,5 +43,10 @@ public class ConcertService {
 	public List<Concert> findAllByPlace( String place) {
 		return concertRepository.findAllByName(place);
 	}
+	
+	public void deleteConcert(Long id) {
+		concertRepository.deleteById(id);
+	}
+
 	
 }

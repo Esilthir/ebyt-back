@@ -34,11 +34,20 @@ public class Concert {
 	private Integer price;
 	@Column
 	private Integer nbBoughtPlace;
+	@Column
+	private boolean active;
+	@Column
+	private String urlVideo;
+	@Column
+	private String urlPic;
+	@Column
+	private String urlPicRec;
 
 	public Concert() {}
 
-	public Concert(String artist, Date date, String place, String genre, String description, Integer nbMaxPlaces,
-			Integer price, Integer nbBoughtPlace) {
+	public Concert(String name, String artist, Date date, String place, String genre, String description, Integer nbMaxPlaces,
+			Integer price) {
+		this.name = name;
 		this.artist = artist;
 		this.date = date;
 		this.place = place;
@@ -46,7 +55,16 @@ public class Concert {
 		this.description = description;
 		this.nbMaxPlaces = nbMaxPlaces;
 		this.price = price;
-		this.nbBoughtPlace = nbBoughtPlace;
+		this.nbBoughtPlace = 0;
+		this.active = true;
+	}
+	
+	public Concert(String name, String artist, Date date, String place, String genre, String description, Integer nbMaxPlaces,
+			Integer price, String urlVideo, String urlPic, String urlPicRec) {
+		this(name, artist, date, place, genre, description, nbMaxPlaces, price);
+		this.urlPic = urlPic;
+		this.urlPicRec = urlPicRec;
+		this.urlVideo = urlVideo;
 	}
 
 	public Long getId() {
@@ -121,4 +139,47 @@ public class Concert {
 	public void setNbBoughtPlace(Integer nbBoughtPlace) {
 		this.nbBoughtPlace = nbBoughtPlace;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public String getUrlVideo() {
+		return urlVideo;
+	}
+
+	public void setUrlVideo(String urlVideo) {
+		this.urlVideo = urlVideo;
+	}
+
+	public String getUrlPic() {
+		return urlPic;
+	}
+
+	public void setUrlPic(String urlPic) {
+		this.urlPic = urlPic;
+	}
+
+	public String getUrlPicRec() {
+		return urlPicRec;
+	}
+
+	public void setUrlPicRec(String urlPicRec) {
+		this.urlPicRec = urlPicRec;
+	}
+	
+	
+	
 }

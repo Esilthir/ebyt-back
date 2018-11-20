@@ -1,6 +1,7 @@
 package formation.dta.ebytback.controller;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
@@ -78,14 +79,8 @@ public class ConcertController {
 		return concertService.findAllOrderByDateDesc(pageRequest);
 //		return concertService.findAll(pageRequest, sortByDateDesc);
 	}
-
-//	@PreAuthorize("hasRole('ROLE_ADMIN')")
-//	@CrossOrigin(origins = "*")
-//	@DeleteMapping("/{id}")
-//	public void deleteById(long id) {
-//	}
-
-	// @PreAuthorize("hasRole('ROLE_ADMIN')")
+	
+	//@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@CrossOrigin(origins = "*")
 	@PostMapping("/")
 	public Concert createConcert(@RequestBody Concert concert) {
@@ -118,5 +113,10 @@ public class ConcertController {
 			throw exceptionDelete;
 		}
 	}
-
+	
+	@CrossOrigin(origins = "*")
+	@GetMapping("/all")
+	public List<Concert> getAll() {
+		return concertService.findAll();
+	}
 }
