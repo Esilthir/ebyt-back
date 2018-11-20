@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import formation.dta.ebytback.exception.DeleteException;
+import formation.dta.ebytback.exception.ResourceNotFoundException;
 import formation.dta.ebytback.model.Concert;
 import formation.dta.ebytback.repository.ConcertRepository;
 import formation.dta.ebytback.service.ConcertService;
@@ -97,21 +99,36 @@ public class ConcertController {
 	// @PreAuthorize("hasRole('ROLE_ADMIN')")
 	@CrossOrigin(origins = "*")
 	@GetMapping("/{id}")
-	public Optional<Concert> getById(@PathParam("id") Long id) {
-		return concertRepository.findById(id);
+	public Concert getById(@PathVariable("id") Long id) {
+		Optional<Concert> oConcert = concertService.getById(id);
+		if(oConcert.isPresent()) {
+			return oConcert.get();
+		}
+		ResourceNotFoundException exceptionNotFound = new ResourceNotFoundException("Le concert " + id + " n'ap as été trouvé");
+		throw exceptionNotFound;
+		
 	}
 
 	// @PreAuthorize("hasRole('ROLE_ADMIN')")
 	@CrossOrigin(origins = "*")
 	@DeleteMapping("/{id}")
-	public void deleteConcert(@PathParam("id") Long id) throws DeleteException {
+	public void deleteConcert(@PathVariable("id") Long id) throws DeleteException, ResourceNotFoundException {
 		// si des réservations ont déjà été faites sur le concert, renvoie un message
-		if (concert.getNbBoughtPlace() == 0) {
-			concertRepository.deleteById(id);
-		} else {
+		System.out.println(id);
+		Optional<Concert> oConcert = concertService.getById(id);
+		if(oConcert.isPresent()) {
+			System.out.println(oConcert.get());
+			concert = oConcert.get();
+			if (concert.getNbBoughtPlace() == 0) {
+				concertRepository.deleteById(id);
+				return;
+			}
 			DeleteException exceptionDelete = new DeleteException();
 			throw exceptionDelete;
 		}
+		ResourceNotFoundException exceptionNotFound = new ResourceNotFoundException("Le concert " + id + " n'ap as été trouvé");
+		throw exceptionNotFound;
+
 	}
 	
 	@CrossOrigin(origins = "*")
