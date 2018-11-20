@@ -44,6 +44,9 @@ public class ConcertService {
 		return concertRepository.findAllByName(place);
 	}
 	
+	public void deleteConcert(Long id) {
+		concertRepository.deleteById(id);
+	}
 
 	
 }

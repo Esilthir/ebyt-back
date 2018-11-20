@@ -36,6 +36,12 @@ public class Concert {
 	private Integer nbBoughtPlace;
 	@Column
 	private boolean active;
+	@Column
+	private String urlVideo;
+	@Column
+	private String urlPic;
+	@Column
+	private String urlPicRec;
 
 	public Concert() {}
 
@@ -51,6 +57,14 @@ public class Concert {
 		this.price = price;
 		this.nbBoughtPlace = 0;
 		this.active = true;
+	}
+	
+	public Concert(String name, String artist, Date date, String place, String genre, String description, Integer nbMaxPlaces,
+			Integer price, String urlVideo, String urlPic, String urlPicRec) {
+		this(name, artist, date, place, genre, description, nbMaxPlaces, price);
+		this.urlPic = urlPic;
+		this.urlPicRec = urlPicRec;
+		this.urlVideo = urlVideo;
 	}
 
 	public Long getId() {
@@ -140,6 +154,30 @@ public class Concert {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public String getUrlVideo() {
+		return urlVideo;
+	}
+
+	public void setUrlVideo(String urlVideo) {
+		this.urlVideo = urlVideo;
+	}
+
+	public String getUrlPic() {
+		return urlPic;
+	}
+
+	public void setUrlPic(String urlPic) {
+		this.urlPic = urlPic;
+	}
+
+	public String getUrlPicRec() {
+		return urlPicRec;
+	}
+
+	public void setUrlPicRec(String urlPicRec) {
+		this.urlPicRec = urlPicRec;
 	}
 	
 	

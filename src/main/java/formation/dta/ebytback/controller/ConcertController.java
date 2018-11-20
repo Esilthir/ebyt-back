@@ -93,12 +93,12 @@ public class ConcertController {
 	
 	
 	
-	
-//	@PreAuthorize("hasRole('ROLE_ADMIN')")
-//	@CrossOrigin(origins = "*")
-//	@DeleteMapping("/{id}")
-//	public void deleteById(long id) {
-//	}
+
+	@CrossOrigin(origins = "*")
+	@DeleteMapping("/{id}")
+	public void deleteById(@PathParam("id") Long id) {
+		concertService.deleteConcert(id);
+	}
 	
 	//@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@CrossOrigin(origins = "*")
