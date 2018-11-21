@@ -28,7 +28,7 @@ public class ConcertRepositoryImpl implements ConcertRepositoryCustom {
 	
 	
 	@Override
-	public List<Concert> search(String genre, String name, String artist, LocalDate date, String place, Double pricemax,
+	public List<Concert> search(String genre, String name, String artist, LocalDate date, String place, Double priceMax,
 			boolean active) {
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Concert> query = builder.createQuery(Concert.class);
@@ -40,24 +40,24 @@ public class ConcertRepositoryImpl implements ConcertRepositoryCustom {
 		Predicate placePredicate = builder.and();
 		Predicate pricemaxPredicate = builder.and();
 		
-		
 		if(!StringUtils.isEmpty(genre)) {
-			genrePredicate = builder.like(root.get("genre"),"%" + genre + "%");
+			genrePredicate = builder.like(builder.upper(root.get("genre")),"%" + genre.toUpperCase() + "%");
 		}
 		if(!StringUtils.isEmpty(name)) {
-			namePredicate = builder.like(root.get("name"), "%" + name + "%");
+			namePredicate = builder.like(builder.upper(root.get("name")), "%" + name.toUpperCase() + "%");
 		}
 		if(!StringUtils.isEmpty(artist)) {
-			artistPredicate= builder.like(root.get("artist"), "%" + artist + "%");
-		}
+			artistPredicate = builder.like(builder.upper(root.get("artist")), "%" + artist.toUpperCase() + "%");
+			}
+		// à voir comment faire pour la date
 		if(!StringUtils.isEmpty(date)) {
-			datePredicate = builder.equal(root.get("date"),date);
+			datePredicate = builder.equal(root.get("date"), date);
 		}
 		if(!StringUtils.isEmpty(place)) {
-			placePredicate = builder.like(root.get("place"), "%" + place +"%");
+			placePredicate = builder.like(builder.upper(root.get("place")), "%" + place.toUpperCase() + "%");
 		}
-		if(!StringUtils.isEmpty(pricemax)) {
-			pricemaxPredicate = builder.le(root.get("price"),pricemax);
+		if(!StringUtils.isEmpty(priceMax)) {
+			pricemaxPredicate = builder.le(root.get("price"),priceMax);
 		}
 //		if(!StringUtils.isEmpty(active)) {
 //			query.where(builder.isTrue(root.get("active")));
@@ -71,6 +71,7 @@ public class ConcertRepositoryImpl implements ConcertRepositoryCustom {
 				placePredicate,
 				pricemaxPredicate
 				));
+		System.out.println(query);
 		
 		TypedQuery<Concert> concertQuery = em.createQuery(query);
 		

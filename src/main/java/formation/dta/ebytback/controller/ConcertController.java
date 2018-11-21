@@ -100,7 +100,7 @@ public class ConcertController {
 		if (oConcert.isPresent()) {
 			return concertService.updateConcert(oConcert, concert);
 		}
-		ResourceNotFoundException exceptionNotFound = new ResourceNotFoundException("Le concert " + id + " n'ap as été trouvé");
+		ResourceNotFoundException exceptionNotFound = new ResourceNotFoundException("Le concert " + id + " n'a pas été trouvé");
 		throw exceptionNotFound;
 		
 
@@ -114,7 +114,7 @@ public class ConcertController {
 		if(oConcert.isPresent()) {
 			return oConcert.get();
 		}
-		ResourceNotFoundException exceptionNotFound = new ResourceNotFoundException("Le concert " + id + " n'ap as été trouvé");
+		ResourceNotFoundException exceptionNotFound = new ResourceNotFoundException("Le concert " + id + " n'a pas été trouvé");
 		throw exceptionNotFound;
 		
 	}
@@ -173,6 +173,7 @@ public class ConcertController {
 //		return concertLast;
 	}
 
+	@CrossOrigin(origins = "*")
 	@GetMapping("/getAll")
 	public List<Concert> getConcerts(
 			@RequestParam(required = false) String genre,
@@ -180,10 +181,11 @@ public class ConcertController {
 			@RequestParam(required = false) String artist,
 			@RequestParam(required = false) LocalDate date,
 			@RequestParam(required = false) String place,
-			@RequestParam(required = false) Double pricemax,
+			@RequestParam(required = false) Double priceMax,
 			@RequestParam(required = false) boolean active
 			) {
-		return concertRepositoryCustom.search(genre, name, artist, date, place, pricemax, active);
+		return concertRepositoryCustom.search(genre, name, artist, date, place, priceMax, active);
+
 	}
 	
 }

@@ -8,7 +8,7 @@ import formation.dta.ebytback.model.Concert;
 
 public interface ConcertRepositoryCustom {
 
-	public List<Concert> search(String genre, String name, String artist, LocalDate date, String place, Double price, boolean active);
+	public List<Concert> search(String genre, String name, String artist, LocalDate date, String place, Double priceMax, boolean active);
 	
 	
 	
