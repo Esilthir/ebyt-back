@@ -76,10 +76,8 @@ public class ConcertService {
 		oConcert.get().setNbMaxPlaces(concert.getNbMaxPlaces());
 		oConcert.get().setPrice(concert.getPrice());
 		oConcert.get().setNbBoughtPlace(concert.getNbBoughtPlace());
-		oConcert.get().setUrlPic(concert.getUrlPic());
 		oConcert.get().setActive(concert.isActive());
 		oConcert.get().setUrlVideo(concert.getUrlVideo());
-		oConcert.get().setUrlPicRec(concert.getUrlPicRec());
 		
 		Concert updateConcert = concertRepository.save(oConcert.get());
 		return updateConcert;

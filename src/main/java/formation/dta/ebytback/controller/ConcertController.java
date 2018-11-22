@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -179,12 +180,27 @@ public class ConcertController {
 			@RequestParam(required = false) String genre,
 			@RequestParam(required = false) String name,
 			@RequestParam(required = false) String artist,
-			@RequestParam(required = false) LocalDate date,
+			@RequestParam(required = false) String date,
 			@RequestParam(required = false) String place,
 			@RequestParam(required = false) Double priceMax,
 			@RequestParam(required = false) boolean active
 			) {
 		return concertRepositoryCustom.search(genre, name, artist, date, place, priceMax, active);
+
+	}
+	
+	@CrossOrigin(origins = "*")
+	@GetMapping("/getAllAdmin")
+	public List<Concert> getConcertsAdmin(
+			@RequestParam(required = false) String genre,
+			@RequestParam(required = false) String name,
+			@RequestParam(required = false) String artist,
+			@RequestParam(required = false) String date,
+			@RequestParam(required = false) String place,
+			@RequestParam(required = false) Double priceMax,
+			@RequestParam(required = false) boolean active
+			) {
+		return concertRepositoryCustom.searchAdmin(genre, name, artist, date, place, priceMax, active);
 
 	}
 	
