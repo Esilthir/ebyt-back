@@ -192,6 +192,7 @@ public class ConcertController {
 	@CrossOrigin(origins = "*")
 	@GetMapping("/getAllAdmin")
 	public List<Concert> getConcertsAdmin(
+			@RequestParam Integer pageNumber, @RequestParam Integer pageSize,
 			@RequestParam(required = false) String genre,
 			@RequestParam(required = false) String name,
 			@RequestParam(required = false) String artist,
@@ -202,6 +203,12 @@ public class ConcertController {
 			) {
 		return concertRepositoryCustom.searchAdmin(genre, name, artist, date, place, priceMax, active);
 
+	}
+	
+	@CrossOrigin(origins = "*")
+	@GetMapping("/count")
+	public long countConcerts() {
+		return concertRepository.count();
 	}
 	
 }

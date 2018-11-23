@@ -2,19 +2,19 @@ package formation.dta.ebytback.repository;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
-import java.util.function.DoubleUnaryOperator;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaContext;
 import org.springframework.util.StringUtils;
 
@@ -77,18 +77,19 @@ public class ConcertRepositoryImpl implements ConcertRepositoryCustom {
 				pricemaxPredicate,
 				activePredicate
 				));
-		System.out.println(query);
 		
 		TypedQuery<Concert> concertQuery = em.createQuery(query);
 		
 		return concertQuery.getResultList();
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Concert> searchAdmin(String genre, String name, String artist, String date, String place, Double priceMax,
-			boolean active) {
+			boolean activee) {
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Concert> query = builder.createQuery(Concert.class);
+				
 		Root<Concert> root = query.from(Concert.class);
 		Predicate genrePredicate = builder.and();
 		Predicate namePredicate = builder.and();
@@ -96,7 +97,6 @@ public class ConcertRepositoryImpl implements ConcertRepositoryCustom {
 		Predicate datePredicate = builder.and();
 		Predicate placePredicate = builder.and();
 		Predicate pricemaxPredicate = builder.and();
-		Predicate activePredicate = builder.and();
 		
 		if(!StringUtils.isEmpty(genre)) {
 			genrePredicate = builder.like(builder.upper(root.get("genre")),"%" + genre.toUpperCase() + "%");
@@ -120,10 +120,8 @@ public class ConcertRepositoryImpl implements ConcertRepositoryCustom {
 			pricemaxPredicate = builder.le(root.get("price"),priceMax);
 		}
 
-
-
-		
-		query.where(builder.and(
+		query.orderBy(builder.asc(root.get("date")))
+		.where(builder.and(
 				genrePredicate,
 				namePredicate,
 				artistPredicate,
@@ -131,11 +129,19 @@ public class ConcertRepositoryImpl implements ConcertRepositoryCustom {
 				placePredicate,
 				pricemaxPredicate
 				));
-		System.out.println(query);
+				
+		CriteriaQuery<Long> countQuery = builder.createQuery(Long.class);
+		countQuery.select(builder.count(countQuery.from(Concert.class)));
+		
+		Long count = em.createQuery(countQuery).getSingleResult();
 		
 		TypedQuery<Concert> concertQuery = em.createQuery(query);
-		
+
+
 		return concertQuery.getResultList();
+		
+		
+		
 	}
 
 }
