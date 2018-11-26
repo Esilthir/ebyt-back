@@ -114,7 +114,14 @@ public class ConcertService {
 		return concertRepository.save(concert);
 	}
 	
-	public void addImage(File image, String type, Long id) {
-		
+	public void addImage(MultipartFile file, Long id, String type) {
+		if(type.equalsIgnoreCase("imgCarre")) {
+			System.out.println("imgCarre");
+			System.out.println(file);
+		}
+		else if(type.equalsIgnoreCase("imgCarre")){
+			System.out.println("imgRec");
+			System.out.println(file);
+		}
 	}
 }

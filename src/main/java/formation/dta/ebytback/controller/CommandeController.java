@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import formation.dta.ebytback.model.Commande;
-import formation.dta.ebytback.model.Item;
+import formation.dta.ebytback.model.User;
 import formation.dta.ebytback.service.CommandeService;
-import formation.dta.ebytback.service.ItemService;
+import formation.dta.ebytback.service.UserService;
 
 @RestController
 @RequestMapping("/commande")
@@ -26,6 +26,8 @@ public class CommandeController {
 
 	@Autowired
 	CommandeService commandeService;
+	@Autowired
+	UserService userService;
 	
 	
 
@@ -47,12 +49,18 @@ public class CommandeController {
 	public Commande getCommande(@PathVariable("id") Long id) {
 		return commandeService.getCommandeById(id);
 	}
-	
 
 	@CrossOrigin(origins = "*")
 	@GetMapping("/")
 	public List<Commande> getAll() {
 		return commandeService.getAll();
+	}
+	
+	@CrossOrigin(origins = "*")
+	@GetMapping("/commande/{id}")
+	public List<Commande> getAllByUser(@PathVariable("id") Long id) {
+		User user = userService.findUserById(id);
+		return commandeService.findAllByUser(user);
 	}
 	
 	@CrossOrigin(origins="*")
