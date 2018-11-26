@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
+import formation.dta.ebytback.exception.ResourceNotFoundException;
 import formation.dta.ebytback.model.User;
 import formation.dta.ebytback.repository.UserRepository;
 
@@ -28,8 +29,17 @@ public class UserService {
 		return userRepository.save(user);
 	}
 
+	public User findUserById(Long id) {
+		
+		Optional<User> oUser = userRepository.findById(id);
+		if (oUser.isPresent()) {
+			return oUser.get();
+		}
+		ResourceNotFoundException exceptionNotFound = new ResourceNotFoundException("Le user " + id + " n'a pas été trouvé");
+		throw exceptionNotFound;
+	}
 
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+
 	public List<User> findAll() {
 		return userRepository.findAll();
 	}
@@ -38,5 +48,10 @@ public class UserService {
 	public void deleteUserById(Long id) {
 		userRepository.deleteById(id);
 		
+	}
+
+
+	public User updateUser(User user) {
+		return userRepository.save(user);
 	}
 }

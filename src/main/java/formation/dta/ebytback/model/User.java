@@ -38,7 +38,6 @@ public class User implements Serializable, UserDetails {
 	
 
 	public User() {
-		this("test@hotmail.fr", "1234", "nom", "prenom");
 	}
 	
 	public User(User user) {
