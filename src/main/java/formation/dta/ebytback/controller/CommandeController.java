@@ -43,7 +43,8 @@ public class CommandeController {
 	
 	@CrossOrigin(origins = "*")
 	@GetMapping("/{id}")
-	public Commande getCommande (@PathVariable("id") Long id) {
+
+	public Commande getCommande(@PathVariable("id") Long id) {
 		return commandeService.getCommandeById(id);
 	}
 	
