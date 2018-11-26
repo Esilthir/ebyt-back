@@ -2,6 +2,7 @@ package formation.dta.ebytback.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
@@ -107,6 +108,20 @@ public class ConcertController {
 		throw exceptionNotFound;
 		
 
+	}
+	
+	@CrossOrigin(origins = "*")
+	@PostMapping("/AddImageCarre/{id}")
+	public void addImageCarre(@PathVariable("id")Long id, @RequestBody MultipartFile file) {
+		System.out.println("coucou Carre");
+		concertService.addImage(file, id, "imgCarre");
+	}
+	
+	@CrossOrigin(origins = "*")
+	@PostMapping("/AddImageRec/{id}")
+	public void addImageRec(@PathVariable("id")Long id, @RequestBody MultipartFile file) {
+		System.out.println("coucou Rec");
+		concertService.addImage(file, id, "imgRec");
 	}
 
 	// @PreAuthorize("hasRole('ROLE_ADMIN')")

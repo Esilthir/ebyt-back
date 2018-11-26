@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import formation.dta.ebytback.model.Commande;
-import formation.dta.ebytback.model.Item;
+import formation.dta.ebytback.model.User;
 import formation.dta.ebytback.service.CommandeService;
-import formation.dta.ebytback.service.ItemService;
+import formation.dta.ebytback.service.UserService;
 
 @RestController
 @RequestMapping("/commande")
@@ -26,27 +26,28 @@ public class CommandeController {
 
 	@Autowired
 	CommandeService commandeService;
+	@Autowired
+	UserService userService;
 	
 	
 
 	@CrossOrigin(origins = "*")
 	@PostMapping("/")
-	public Commande createUser(@RequestBody @Valid Commande commande) {
+	public Commande createCommande(@RequestBody @Valid Commande commande) {
 		return commandeService.createCommande(commande);
 	}
 	
 	@CrossOrigin(origins = "*")
 	@DeleteMapping("/{id}")
-	public void deleteUserById(@PathVariable("id") Long id) {
+	public void deleteCommandeById(@PathVariable("id") Long id) {
 		commandeService.deleteCommande(id);
 	}
 	
 	@CrossOrigin(origins = "*")
 	@GetMapping("/{id}")
-	public Commande getUser(@PathVariable("id") Long id) {
+	public Commande getCommande(@PathVariable("id") Long id) {
 		return commandeService.getCommandeById(id);
 	}
-	
 
 	@CrossOrigin(origins = "*")
 	@GetMapping("/")
@@ -54,9 +55,16 @@ public class CommandeController {
 		return commandeService.getAll();
 	}
 	
+	@CrossOrigin(origins = "*")
+	@GetMapping("/commande/{id}")
+	public List<Commande> getAllByUser(@PathVariable("id") Long id) {
+		User user = userService.findUserById(id);
+		return commandeService.findAllByUser(user);
+	}
+	
 	@CrossOrigin(origins="*")
 	@PutMapping("/{id}")
-	public Commande updateUser(@RequestBody @Valid Commande commande) {
+	public Commande updateCommande(@RequestBody @Valid Commande commande) {
 		return commandeService.updateCommande(commande);
 	}
 }

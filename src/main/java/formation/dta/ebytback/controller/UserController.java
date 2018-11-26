@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import formation.dta.ebytback.model.User;
+import formation.dta.ebytback.repository.CommandeRepository;
 import formation.dta.ebytback.repository.UserRepository;
 import formation.dta.ebytback.service.UserService;
 

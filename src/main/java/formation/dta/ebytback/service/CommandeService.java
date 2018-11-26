@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import formation.dta.ebytback.exception.ResourceNotFoundException;
 import formation.dta.ebytback.model.Commande;
 import formation.dta.ebytback.model.Item;
+import formation.dta.ebytback.model.User;
 import formation.dta.ebytback.repository.CommandeRepository;
 
 @Service
@@ -50,6 +51,10 @@ public class CommandeService {
 			itemService.deleteItem(item.getId());
 		}
 		commandeRepository.deleteById(id);
+	}
+	
+	public List<Commande> findAllByUser(User user){
+		return commandeRepository.findAllByUser(user);
 	}
 	
 }
