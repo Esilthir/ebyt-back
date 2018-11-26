@@ -24,9 +24,5 @@ public interface ConcertRepository extends JpaRepository<Concert, Long> {
 	List<Concert> findAllByArtist(String artist);
 	List<Concert> findAllByGenre(String genre);
 	List<Concert> findAllByDate(String date);
-	List<Concert> findAllByPlace(String place);
-
-	
-		
-	}
-	
+	List<Concert> findAllByPlace(String place);		
+}	

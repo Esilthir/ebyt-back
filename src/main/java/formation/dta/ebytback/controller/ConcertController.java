@@ -173,6 +173,7 @@ public class ConcertController {
 //		return concertLast;
 	}
 
+	@CrossOrigin(origins = "*")
 	@GetMapping("/getAll")
 	public List<Concert> getConcerts(
 			@RequestParam(required = false) String genre,

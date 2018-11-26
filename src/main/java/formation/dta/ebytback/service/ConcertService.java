@@ -1,5 +1,6 @@
 package formation.dta.ebytback.service;
 
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import formation.dta.ebytback.model.Concert;
 import formation.dta.ebytback.repository.ConcertRepository;
@@ -76,14 +78,18 @@ public class ConcertService {
 		oConcert.get().setNbMaxPlaces(concert.getNbMaxPlaces());
 		oConcert.get().setPrice(concert.getPrice());
 		oConcert.get().setNbBoughtPlace(concert.getNbBoughtPlace());
-		oConcert.get().setUrlPic(concert.getUrlPic());
 		oConcert.get().setActive(concert.isActive());
 		oConcert.get().setUrlVideo(concert.getUrlVideo());
-		oConcert.get().setUrlPicRec(concert.getUrlPicRec());
 		
 		Concert updateConcert = concertRepository.save(oConcert.get());
 		return updateConcert;
 	}
-
 	
+	public Concert createConcert(Concert concert) {
+		return concertRepository.save(concert);
+	}
+	
+	public void addImage(File image, String type, Long id) {
+		
+	}
 }
