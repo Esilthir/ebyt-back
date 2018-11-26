@@ -25,5 +25,34 @@ public class Commande {
 	@OneToMany 
 	private List<Item> itemCommande = new ArrayList<Item>();
 
+	public Commande() {
+	
+	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public List<Item> getItemCommande() {
+		return itemCommande;
+	}
+
+	public void setItemCommande(List<Item> itemCommande) {
+		this.itemCommande = itemCommande;
+	}
+	
+	
+	
 }

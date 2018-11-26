@@ -11,6 +11,5 @@ import formation.dta.ebytback.model.Commande;
 @Transactional
 public interface CommandeRepository extends JpaRepository<Commande, Long> {
 
-	
-	
+
 }

@@ -28,6 +28,42 @@ public class Item {
 	@ManyToOne
 	private Commande commandeId;
 	
+	public Item() {
+		
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Concert getConcert() {
+		return concert;
+	}
+
+	public void setConcert(Concert concert) {
+		this.concert = concert;
+	}
+
+	public Integer getQuantite() {
+		return quantite;
+	}
+
+	public void setQuantite(Integer quantite) {
+		this.quantite = quantite;
+	}
+
+	public Commande getCommandeId() {
+		return commandeId;
+	}
+
+	public void setCommandeId(Commande commandeId) {
+		this.commandeId = commandeId;
+	}
+	
 	
 
 }

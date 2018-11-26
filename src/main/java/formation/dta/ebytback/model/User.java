@@ -33,7 +33,7 @@ public class User implements Serializable, UserDetails {
 	private String picture;
 	@Column
 	private String role;
-	@OneToMany 
+	@OneToMany(mappedBy = "user")
 	private List<Commande> commandeConcert = new ArrayList<Commande>();
 	
 

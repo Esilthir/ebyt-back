@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import formation.dta.ebytback.model.Commande;
+import formation.dta.ebytback.model.Item;
 import formation.dta.ebytback.service.CommandeService;
+import formation.dta.ebytback.service.ItemService;
 
 @RestController
 @RequestMapping("/commande")
@@ -24,6 +26,7 @@ public class CommandeController {
 
 	@Autowired
 	CommandeService commandeService;
+	
 	
 
 	@CrossOrigin(origins = "*")
