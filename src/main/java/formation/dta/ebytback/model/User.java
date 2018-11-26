@@ -1,13 +1,14 @@
 package formation.dta.ebytback.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.*;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 
 @Entity
 @Table(name="users")
@@ -32,6 +33,8 @@ public class User implements Serializable, UserDetails {
 	private String picture;
 	@Column
 	private String role;
+	@OneToMany 
+	private List<Commande> commandeConcert = new ArrayList<Commande>();
 	
 
 	public User() {

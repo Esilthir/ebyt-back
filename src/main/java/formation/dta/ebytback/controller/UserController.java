@@ -57,7 +57,7 @@ public class UserController {
 	public List<User> getAll() {
 		return userService.findAll();
 	}
-	
+
 	@CrossOrigin(origins="*")
 	@PutMapping("/{id}")
 	public User updateUser(@RequestBody @Valid User user) {

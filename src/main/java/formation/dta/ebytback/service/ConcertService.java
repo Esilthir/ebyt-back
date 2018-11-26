@@ -13,6 +13,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 import formation.dta.ebytback.model.Concert;
 import formation.dta.ebytback.repository.ConcertRepository;
@@ -107,6 +109,12 @@ public class ConcertService {
 		return false;
 	}
 
-
 	
+	public Concert createConcert(Concert concert) {
+		return concertRepository.save(concert);
+	}
+	
+	public void addImage(File image, String type, Long id) {
+		
+	}
 }

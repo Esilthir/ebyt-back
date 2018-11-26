@@ -40,7 +40,6 @@ public class Concert {
 	@Column
 	private String urlVideo;
 
-
 	public Concert() {}
 
 	public Concert(String name, String artist, LocalDate date, String place, String genre, String description, Integer nbMaxPlaces,
@@ -159,9 +158,4 @@ public class Concert {
 	public void setUrlVideo(String urlVideo) {
 		this.urlVideo = urlVideo;
 	}
-
-
-	
-	
-	
 }
