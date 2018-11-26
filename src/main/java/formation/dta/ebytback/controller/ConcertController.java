@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import formation.dta.ebytback.exception.DeleteException;
 import formation.dta.ebytback.exception.ResourceNotFoundException;
 import formation.dta.ebytback.model.Concert;
+import formation.dta.ebytback.model.EnumGenres;
 import formation.dta.ebytback.repository.ConcertRepository;
 import formation.dta.ebytback.repository.ConcertRepositoryImpl;
 import formation.dta.ebytback.service.ConcertService;
@@ -182,28 +183,25 @@ public class ConcertController {
 			@RequestParam(required = false) String genre,
 			@RequestParam(required = false) String name,
 			@RequestParam(required = false) String artist,
-			@RequestParam(required = false) String date,
 			@RequestParam(required = false) String place,
 			@RequestParam(required = false) Double priceMax,
 			@RequestParam(required = false) boolean active
 			) {
-		return concertRepositoryCustom.search(genre, name, artist, date, place, priceMax, active);
+		return concertRepositoryCustom.search(genre, name, artist, place, priceMax, active);
 
 	}
 	
 	@CrossOrigin(origins = "*")
 	@GetMapping("/getAllAdmin")
 	public List<Concert> getConcertsAdmin(
-			@RequestParam Integer pageNumber, @RequestParam Integer pageSize,
 			@RequestParam(required = false) String genre,
 			@RequestParam(required = false) String name,
 			@RequestParam(required = false) String artist,
-			@RequestParam(required = false) String date,
 			@RequestParam(required = false) String place,
 			@RequestParam(required = false) Double priceMax,
 			@RequestParam(required = false) boolean active
 			) {
-		return concertRepositoryCustom.searchAdmin(genre, name, artist, date, place, priceMax, active);
+		return concertRepositoryCustom.searchAdmin(genre, name, artist, place, priceMax, active);
 
 	}
 	
@@ -223,4 +221,10 @@ public class ConcertController {
 		}
     }
 	
+	@CrossOrigin(origins = "*")
+	@GetMapping("/allGenres")
+    public List<String> allGenres()
+	{
+		return EnumGenres.getAllGenres();
+    }
 }

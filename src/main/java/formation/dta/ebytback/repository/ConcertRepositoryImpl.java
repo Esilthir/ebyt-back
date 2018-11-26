@@ -1,7 +1,5 @@
 package formation.dta.ebytback.repository;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,10 +9,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaContext;
 import org.springframework.util.StringUtils;
 
@@ -31,7 +26,7 @@ public class ConcertRepositoryImpl implements ConcertRepositoryCustom {
 	
 	
 	@Override
-	public List<Concert> search(String genre, String name, String artist, String date, String place, Double priceMax,
+	public List<Concert> search(String genre, String name, String artist, String place, Double priceMax,
 			boolean active) {
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Concert> query = builder.createQuery(Concert.class);
@@ -54,11 +49,11 @@ public class ConcertRepositoryImpl implements ConcertRepositoryCustom {
 			artistPredicate = builder.like(builder.upper(root.get("artist")), "%" + artist.toUpperCase() + "%");
 			}
 		// à voir comment faire pour la date
-		if(!StringUtils.isEmpty(date)) {
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			LocalDate localDate = LocalDate.parse(date, formatter);
-			datePredicate = builder.equal(root.get("date"), localDate);
-		}
+//		if(!StringUtils.isEmpty(date)) {
+//			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//			LocalDate localDate = LocalDate.parse(date, formatter);
+//			datePredicate = builder.equal(root.get("date"), localDate);
+//		}
 		if(!StringUtils.isEmpty(place)) {
 			placePredicate = builder.like(builder.upper(root.get("place")), "%" + place.toUpperCase() + "%");
 		}
@@ -85,7 +80,7 @@ public class ConcertRepositoryImpl implements ConcertRepositoryCustom {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Concert> searchAdmin(String genre, String name, String artist, String date, String place, Double priceMax,
+	public List<Concert> searchAdmin(String genre, String name, String artist, String place, Double priceMax,
 			boolean activee) {
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Concert> query = builder.createQuery(Concert.class);
@@ -108,11 +103,11 @@ public class ConcertRepositoryImpl implements ConcertRepositoryCustom {
 			artistPredicate = builder.like(builder.upper(root.get("artist")), "%" + artist.toUpperCase() + "%");
 			}
 		// à voir comment faire pour la date
-		if(!StringUtils.isEmpty(date)) {
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			LocalDate localDate = LocalDate.parse(date, formatter);
-			datePredicate = builder.equal(root.get("date"), localDate);
-		}
+//		if(!StringUtils.isEmpty(date)) {
+//			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//			LocalDate localDate = LocalDate.parse(date, formatter);
+//			datePredicate = builder.equal(root.get("date"), localDate);
+//		}
 		if(!StringUtils.isEmpty(place)) {
 			placePredicate = builder.like(builder.upper(root.get("place")), "%" + place.toUpperCase() + "%");
 		}
@@ -136,7 +131,6 @@ public class ConcertRepositoryImpl implements ConcertRepositoryCustom {
 		Long count = em.createQuery(countQuery).getSingleResult();
 		
 		TypedQuery<Concert> concertQuery = em.createQuery(query);
-
 
 		return concertQuery.getResultList();
 		
