@@ -1,8 +1,10 @@
 package formation.dta.ebytback.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +26,9 @@ public class Commande {
 	
 	@OneToMany 
 	private List<Item> itemCommande = new ArrayList<Item>();
+	
+	@Column
+	private LocalDate date = LocalDate.now();
 
 	public Commande() {
 	
@@ -51,6 +56,14 @@ public class Commande {
 
 	public void setItemCommande(List<Item> itemCommande) {
 		this.itemCommande = itemCommande;
+	}
+
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
 	
 	
