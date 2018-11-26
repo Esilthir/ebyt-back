@@ -1,5 +1,8 @@
 package formation.dta.ebytback.service;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import formation.dta.ebytback.model.Concert;
 import formation.dta.ebytback.repository.ConcertRepository;
@@ -82,6 +86,27 @@ public class ConcertService {
 		Concert updateConcert = concertRepository.save(oConcert.get());
 		return updateConcert;
 	}
+	
+	public boolean sauvegarderImage(MultipartFile f) throws IOException
+	{
+		FileOutputStream sortie = null;
+		try 
+		{
+			File file = new File("/" + f.getOriginalFilename());
+			sortie = new FileOutputStream(file);
+			sortie.write(f.getBytes());
+			return true;
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			sortie.close();
+		}
+		return false;
+	}
+
 
 	
 }

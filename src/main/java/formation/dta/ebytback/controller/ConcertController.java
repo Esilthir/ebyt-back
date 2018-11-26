@@ -2,6 +2,7 @@ package formation.dta.ebytback.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import formation.dta.ebytback.exception.DeleteException;
 import formation.dta.ebytback.exception.ResourceNotFoundException;
@@ -210,5 +212,15 @@ public class ConcertController {
 	public long countConcerts() {
 		return concertRepository.count();
 	}
+	
+	@CrossOrigin(origins = "*")
+	@PostMapping("/stocker/")
+    public void stocker(@RequestParam MultipartFile file) {
+		try {
+			this.concertService.sauvegarderImage(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
 	
 }
